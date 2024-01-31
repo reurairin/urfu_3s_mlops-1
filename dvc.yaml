@@ -35,3 +35,11 @@ stages:
         - train.max_depth
       outs:
         - models/model.pkl
+  evaluate:
+      cmd: python scripts/model/evaluate.py models/model.pkl data/split/test.csv metrics/evaluate.json
+      deps:
+        - models/model.pkl
+        - data/split/test.csv
+        - scripts/model/evaluate.py
+      metrics:
+        - metrics/evaluate.json
