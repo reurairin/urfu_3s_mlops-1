@@ -1,0 +1,15 @@
+stages:
+  get_features:
+    cmd: python scripts/data_processing/get_features.py data/train.csv
+    deps:
+      - data/train.csv
+      - scripts/data_processing/get_features.py
+    outs:
+      - data/features/train.csv
+  encode:
+      cmd: python scripts/data_processing/encode.py data/features/train.csv
+      deps:
+        - data/features/train.csv
+        - scripts/data_processing/encode.py
+      outs:
+        - data/prepared/train.csv
