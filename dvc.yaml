@@ -13,3 +13,25 @@ stages:
         - scripts/data_processing/encode.py
       outs:
         - data/prepared/train.csv
+
+  split:
+      cmd: python3 scripts/model/split_data.py data/prepared/train.csv
+      deps:
+        - data/prepared/train.csv
+        - scripts/model/split_data.py
+      params:
+        - split.split_ratio
+      outs:
+        - data/split/train.csv
+        - data/split/test.csv   
+  train_model:
+      cmd: python scripts/model/train_model.py data/split/train.csv
+      deps:
+        - data/split/train.csv
+        - scripts/model/train_model.py
+        - params.yaml
+      params:
+        - train.n_estimators
+        - train.max_depth
+      outs:
+        - models/model.pkl
