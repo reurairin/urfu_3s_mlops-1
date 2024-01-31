@@ -42,4 +42,5 @@ stages:
         - data/split/test.csv
         - scripts/model/evaluate.py
       metrics:
-        - metrics/evaluate.json
+        - metrics/evaluate.json:
+            cache: false
